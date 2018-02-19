@@ -1,3 +1,3 @@
-rootProject.name = 'LearnRN'
+rootProject.name = 'learn-rn'
 
 include ':app'

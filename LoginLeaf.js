@@ -15,7 +15,7 @@ import {
 
 let widthOfMargin = Dimensions.get('window').width * 0.05;
 
-export default class App extends Component {
+export default class LoginLeaf extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,11 +64,24 @@ render() {
         <Text style={styles.textPromptStyle}>
           您输入的密码：{this.state.inputedPW}
         </Text>
-        <Text style={styles.bigTextPrompt}>
+        <Text style={styles.bigTextPrompt}
+          onPress={() => this.userPressConfirm()}>
           确定
+        </Text>
+        <Text style={styles.bigTextPrompt}
+          onPress={() => this.userPressAddressBook()}>
+          通讯录
         </Text>
       </View>
     );
+  }
+  userPressConfirm() {
+    this.props.onLoginPressed(this.state.inputedNum, this.state.inputedPW);
+  }
+
+  userPressAddressBook() {
+    //TODO:     
+    console.log('点击了通讯录按钮');
   }
 }
 
