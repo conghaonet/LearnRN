@@ -30,7 +30,7 @@ export default class App extends Component<{}> {
     console.log('Screen height is:' + height);
     console.log('Screen width is:' + width);
     console.log('The type of aValue is:' + typeof(value));
-    console.warn('一逻辑像素等于' + pixelRatio + '实际像素单位');
+    // console.warn('一逻辑像素等于' + pixelRatio + '实际像素单位');
     
     return (
       <View style={styles.container}>
