@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import {
   // Platform, StyleSheet, Text, View, Dimensions, PixelRatio
-  AppRegistry, StyleSheet, Text, View, Dimensions, TextInput
+  AppRegistry, StyleSheet, Text, View, Dimensions, TextInput, Alert
 } from 'react-native';
 
 // const {height, width} = Dimensions.get('window')
@@ -23,6 +23,7 @@ export default class LoginLeaf extends Component {
       inputedPW: ''
     };
     this.updatePW = this.updatePW.bind(this)
+    this.jumpToWaiting = this.jumpToWaiting.bind(this)
   }
   updateNum(inputedNum) {
     this.setState((state) => {
@@ -76,6 +77,17 @@ render() {
     );
   }
   userPressConfirm() {
+    Alert.alert(
+      '提示',
+      '确定使用'+this.state.inputedNum+'号码登录码？',
+      [
+        {text: '取消', onPress: (() => {}), style: 'cancel'},
+        {text: '确定', onPress: this.jumpToWaiting}
+      ],
+      // {cancelable: false} //点击返回键、空白区域不消失
+    );
+  }
+  jumpToWaiting() {
     this.props.onLoginPressed(this.state.inputedNum, this.state.inputedPW);
   }
 
