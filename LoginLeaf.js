@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import {
   // Platform, StyleSheet, Text, View, Dimensions, PixelRatio
-  AppRegistry, StyleSheet, Text, View, Dimensions, TextInput, Alert
+  AppRegistry, StyleSheet, Text, View, Dimensions, TextInput, Alert, DeviceEventEmitter
 } from 'react-native';
 
 // const {height, width} = Dimensions.get('window')
@@ -92,8 +92,20 @@ render() {
   }
 
   userPressAddressBook() {
-    //TODO:     
+    // DeviceEventEmitter.addListener('AndroidToRNMessage', this.handleAndroidMessage.bind(this));
     console.log('点击了通讯录按钮');
+    var {NativeModules} = require('react-native');
+    let example = NativeModules.ExampleInterface;
+    example.HandleMessage('testMessage', (result) => {
+      this.setState({inputedNum: result});
+    });
+    console.log('=====userPressAddressBook 结束=====');
+
+  }
+  handleAndroidMessage(aMessage) {
+    console.log('handleAndroidMessage: ' + aMessage);
+    let aObj = JSON.parse(aMessage);
+    this.setState({inputedNum: aObj.phoneNumber});
   }
 }
 
