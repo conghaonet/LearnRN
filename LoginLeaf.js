@@ -96,9 +96,44 @@ render() {
     console.log('点击了通讯录按钮');
     var {NativeModules} = require('react-native');
     let example = NativeModules.ExampleInterface;
-    example.HandleMessage('testMessage', (result) => {
-      this.setState({inputedNum: result});
-    });
+    // 回调方式
+    // example.HandleMessage('testMessage', (result) => {
+    //   this.setState({inputedNum: result});
+    // });
+
+    console.log('MY_NAME is: ' + example.MY_NAME);
+
+    example.HandleMessage('testMessage from RN').then(
+      (result) => {
+        console.log('Promise message: ' + result);
+        let aObj = JSON.parse(result);
+        this.setState({inputedNum: aObj.phoneNumber});
+        return
+      }
+    ).catch(
+      (error) => {
+        console.log('Promise error: ' + error);
+        console.log('Promise error: ' + error.message);
+        console.log('Promise error: ' + error.code);
+      }
+    );
+
+  //   example.HandleMessage('testMessage from RN').then(
+  //     (result) => {
+  //         // 处理成功的事件
+  //         console.log('Promise message: ' + result);
+  //         let aObj = JSON.parse(result);
+  //         this.setState({inputedNum: aObj.phoneNumber});
+  //     }
+  // ).catch(
+  //     (error)=>{
+  //         // 处理失败的事件
+  //         console.log('Promise error: ' + error);
+  //       console.log('Promise error: ' + error.message);
+  //       console.log('Promise error: ' + error.code);
+  // }
+  // );
+
     console.log('=====userPressAddressBook 结束=====');
 
   }
