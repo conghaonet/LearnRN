@@ -1,13 +1,13 @@
 
 import React, { Component } from 'react';
 import {
-    StyleSheet, Text, View
+    StyleSheet, Text, View, Image
 } from 'react-native';
 
 export default class TryFlexbox extends Component {
     onLayout(event) {
         {
-            let {width,x,y,height} = event.nativeEvent.layout;
+            let {x, y, width, height} = event.nativeEvent.layout;
             console.log('onLayout x = ' + x);
             console.log('onLayout y = ' + y);
             console.log('onLayout width = ' + width);
@@ -15,13 +15,38 @@ export default class TryFlexbox extends Component {
         }
     }
     render() {
+        //http://ww1.sinaimg.cn/large/0060lm7Tly1fooavenxnhj310z164n5k.jpg
+        //http://ww4.sinaimg.cn/large/0060lm7Tly1fooaphegztj30gy0b3jrf.jpg
+        // var imageSource = 'http://cs.101.com/v0.1/static/fep/static/course-covers/bi/bi_cover7.png';
+        let imageSource = {
+            uri: 'http://cs.101.com/v0.1/static/fep/static/course-covers/bi/bi_cover7.png'
+        };
+
+        Image.getSize(imageSource.uri, (width, height) => {
+                console.log('imageSource width = ' + width);
+                console.log('imageSource height = ' + height);
+        });
+
+        let imageSourceA = {
+            uri: 'http://cs.101.com/v0.1/static/fep/static/course-covers/bi/bi_cover6.png'
+        };
+
+        Image.prefetch(imageSourceA.uri).then((result) => {
+            console.log('imageA result = ' + result);
+        }).catch((error) => {
+            console.log('imageA error = ' + error);
+        });
         return (
             <View style={styles.container} onLayout={this.onLayout}>
-                <View style={styles.firstRow}>
+                <View style={styles.firstRow} top={40}>
                     <View style={styles.test1} />
                     <View style={styles.test2} />
                     <View style={styles.test3} />
                 </View>
+                <Image style={styles.imageStyle} top={40} source={imageSource}/>
+                <Image style={styles.imageStyle} top={40} source={imageSourceA}/>
+                <Image style={styles.imageStyle} top={40} width={90} height={90} backgroundColor={'grey'} resizeMode={'center'} source={imageSourceA}/>
+                <Image style={styles.imageStyle} top={40} width={90} height={90} source={require('./ic_launcher.png')}/>
                 <View style={styles.testPosition}/>
             </View>
         );
@@ -36,7 +61,6 @@ const styles = StyleSheet.create({
     },
     firstRow: {
         height: 80,
-        top: 40,
         backgroundColor: 'black',
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -69,5 +93,10 @@ const styles = StyleSheet.create({
         top: 150,
         right: 50
     },
+    imageStyle: {
+        width: 213,
+        height: 120,
+        backgroundColor: 'white'
+    }
 });
   

@@ -152,12 +152,12 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     margin: widthOfMargin,
-    fontSize: 20,
-    height: 60,
+    fontSize: 12,
     backgroundColor: 'gray'
   },
   textPromptStyle: {
     margin: widthOfMargin,
+    textAlign: 'center',
     fontSize: 20
   },
   bigTextPrompt: {
