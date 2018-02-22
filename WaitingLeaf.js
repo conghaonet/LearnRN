@@ -6,8 +6,12 @@ import {
 import PropTypes from 'prop-types';
 
 export default class WaitingLeaf extends Component {
+    static navigationOptions = {
+        title: '登录中...',
+    }
     constructor(props) {
         super(props);
+        this.onGoback = this.onGoback.bind(this);
     }
     onLoginPressed(aNumber, aPW) {
         this.setState({
@@ -17,13 +21,17 @@ export default class WaitingLeaf extends Component {
         });
     }
     render() {
+        //通过StackNavigator方式传递的参数
+        const { params } = this.props.navigation.state;
         return (
             <View style={styles.container}>
             <Text style={styles.textPromptStyle}>
-                登录手机号：{this.props.phoneNumber}
+                {/* 登录手机号：{this.props.phoneNumber} */}
+                登录手机号：{params.phoneNumber}
             </Text>
             <Text style={styles.textPromptStyle}>
-                登录密码：{this.props.userPW}
+                {/* 登录密码：{this.props.userPW} */}
+                登录密码：{params.userPW}
             </Text>
             <Text style={styles.bigTextPrompt} onPress={() =>this.onGoback()}>
                 返回
@@ -33,14 +41,15 @@ export default class WaitingLeaf extends Component {
         );
     }
     onGoback() {
-        this.props.onGobackPressed();
+        // this.props.onGobackPressed();
+        this.props.navigation.goBack(); //弹出当前界面，返回上一个界面
     }
 }
 
 WaitingLeaf.propTypes = {
-    phoneNumber: PropTypes.string.isRequired,
-    userPW: PropTypes.string.isRequired,
-    onGobackPressed: PropTypes.func
+    // phoneNumber: PropTypes.string.isRequired,
+    // userPW: PropTypes.string.isRequired,
+    // onGobackPressed: PropTypes.func
 };
 
 
