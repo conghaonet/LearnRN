@@ -3,12 +3,17 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text, View
 } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 
 export default class WaitingLeaf extends Component {
-    static navigationOptions = {
-        title: '登录中...',
-    }
+    // static navigationOptions = {
+    //     title: '登录中...',
+    // }
+    static navigationOptions =({navigation}) =>({
+        title: '登录中...'+navigation.state.params.phoneNumber,
+    });
+    
     constructor(props) {
         super(props);
         this.onGoback = this.onGoback.bind(this);
@@ -42,7 +47,63 @@ export default class WaitingLeaf extends Component {
     }
     onGoback() {
         // this.props.onGobackPressed();
-        this.props.navigation.goBack(); //弹出当前界面，返回上一个界面
+        // this.props.navigation.goBack(); //弹出当前界面，返回上一个界面
+        const resetAction = NavigationActions.reset({
+            index: 5,
+            actions: [
+                NavigationActions.navigate(
+                    {
+                        routeName: 'Home'
+                    }
+                ),
+                NavigationActions.navigate(
+                    {
+                        routeName: 'Wait',
+                        params: {
+                            phoneNumber: 1,
+                            userPW: 1
+                        }
+                    }
+                ),
+                NavigationActions.navigate(
+                    {
+                        routeName: 'Wait',
+                        params: {
+                            phoneNumber: 2,
+                            userPW: 2
+                        }
+                    }
+                ),
+                NavigationActions.navigate(
+                    {
+                        routeName: 'Wait',
+                        params: {
+                            phoneNumber: 3,
+                            userPW: 3
+                        }
+                    }
+                ),
+                NavigationActions.navigate(
+                    {
+                        routeName: 'Wait',
+                        params: {
+                            phoneNumber: 4,
+                            userPW: 4
+                        }
+                    }
+                ),
+                NavigationActions.navigate(
+                    {
+                        routeName: 'Wait',
+                        params: {
+                            phoneNumber: 5,
+                            userPW: 5
+                        }
+                    }
+                )
+            ]
+        })
+        this.props.navigation.dispatch(resetAction);
     }
 }
 

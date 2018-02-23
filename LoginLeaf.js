@@ -18,15 +18,16 @@ let widthOfMargin = Dimensions.get('window').width * 0.05;
 export default class LoginLeaf extends Component {
   static navigationOptions = {
     title: '登录'
-  }
+  };
   constructor(props) {
     super(props);
     this.state = {
       inputedNum: '',
       inputedPW: ''
     };
-    this.updatePW = this.updatePW.bind(this)
-    this.jumpToWaiting = this.jumpToWaiting.bind(this)
+    this.updatePW = this.updatePW.bind(this);
+    this.jumpToWaiting = this.jumpToWaiting.bind(this);
+    this.showWaitingModalBeforeJump = this.showWaitingModalBeforeJump.bind(this);
   }
   updateNum(inputedNum) {
     this.setState((state) => {
@@ -50,6 +51,7 @@ export default class LoginLeaf extends Component {
     this.setState({inputedPW});
   }
 render() {
+    // console.log('this.props.screenProps.prop1 = '+this.props.screenProps.prop1);
     console.log('This is render.');
     console.log(this);
     return (
@@ -79,19 +81,25 @@ render() {
       </View>
     );
   }
+  showWaitingModalBeforeJump() { //当用户按下确定时，启动一个定时器，并显示自定义Modal
+    this.props.screenProps.setWaitingModal( true, '请等待...' );
+    this.aTimer = window.setTimeout( this.jumpToWaiting, 3000);
+  }
   userPressConfirm() {
     Alert.alert(
       '提示',
       '确定使用'+this.state.inputedNum+'号码登录码？',
       [
         {text: '取消', onPress: (() => {}), style: 'cancel'},
-        {text: '确定', onPress: this.jumpToWaiting}
+        {text: '确定', onPress: this.showWaitingModalBeforeJump}
       ],
       // {cancelable: false} //点击返回键、空白区域不消失
     );
   }
   jumpToWaiting() {
     // this.props.onLoginPressed(this.state.inputedNum, this.state.inputedPW);
+
+    this.props.screenProps.setWaitingModal( false, '' );
     this.props.navigation.navigate( 'Wait', //导航跳转命令
       { //传递属性
         phoneNumber:this.state.inputedNum,

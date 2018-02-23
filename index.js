@@ -9,8 +9,8 @@ import { AppRegistry } from 'react-native';
 // import TryFlexbox from './TryFlexbox';
 // AppRegistry.registerComponent('learn-rn', () => TryFlexbox);
 
-import SimpleApp from './TryNavigation';
-AppRegistry.registerComponent('learn-rn', () => SimpleApp);
+import TryNavigation from './TryNavigation';
+AppRegistry.registerComponent('learn-rn', () => TryNavigation);
 
 
 // import React, { Component } from 'react';
