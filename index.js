@@ -9,18 +9,10 @@ import { AppRegistry } from 'react-native';
 // import TryFlexbox from './TryFlexbox';
 // AppRegistry.registerComponent('learn-rn', () => TryFlexbox);
 
-import TryNavigation from './TryNavigation';
-AppRegistry.registerComponent('learn-rn', () => TryNavigation);
+// import TryNavigation from './TryNavigation';
+// AppRegistry.registerComponent('learn-rn', () => TryNavigation);
 
-
-// import React, { Component } from 'react';
-// import { AppRegistry } from 'react-native';
-// import { StackNavigator } from 'react-navigation';
-// import LoginLeaf from './LoginLeaf';
-// import WaitingLeaf from './WaitingLeaf';
-
-// const SimpleApp = StackNavigator ({
-//     Home: {screen: LoginLeaf},
-//     Wait: {screen: WaitingLeaf}
-// });
-// AppRegistry.registerComponent('learn-rn', () => SimpleApp);
+import TryFetch from './TryFetch';
+//关闭提示：Remote debugger is in a background tab which may cause apps to perform slowly……
+console.ignoredYellowBox = ['Remote debugger'];
+AppRegistry.registerComponent('learn-rn', () => TryFetch);

@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { AppRegistry, View, StyleSheet } from 'react-native';
+import { AppRegistry, View, StyleSheet, NetInfo } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import LoginLeaf from './LoginLeaf';
 import WaitingLeaf from './WaitingLeaf';
@@ -28,6 +28,9 @@ export default class TryNavigation extends Component {
         this.setWaitingModal = this.setWaitingModal.bind(this);
     }
     render() {
+        NetInfo.getConnectionInfo().done((info) => {
+            console.log('NetInfo info is: '+info.type);
+        });
         return (
             <View style={styles.container} >
                 <SimpleApp screenProps = {{ prop1: 'value1', prop2: 'value2', setWaitingModal:this.setWaitingModal}} />
