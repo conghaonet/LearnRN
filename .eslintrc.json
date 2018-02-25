@@ -1,16 +1,17 @@
 {
     "parser": "babel-eslint",
   
+    "plugins": ["react"],
+  
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    
     "env": {
       "browser": true,
+      "commonjs": true,
       "node": true,
       "es6": true
     },
   
-    "plugins": ["react"],
-  
-    "extends": ["eslint:recommended"],
-    
     "rules": {
       "no-console": "off"
     }
